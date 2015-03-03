@@ -10,7 +10,9 @@ package com.tgds.pong.game;
 import java.awt.Point;
 
 /**
- * A 2 dimensional vector for use in the game.
+ * A 2 dimensional vector for use in the game. Performs automatic conversion
+ * between Cartesian and polar types. Create new vectors by calling
+ * {@link #cartesian(double, double)} and {@link #polar(double, double)}.
  * 
  * @author jdl
  */
@@ -22,6 +24,12 @@ public class Vector {
 	/** the y coordinate of the vector */
 	private final double y;
 
+	/** the angle of the vector, in degrees */
+	private final double angle;
+
+	/** the magnitude of the vector. */
+	private final double magnitude;
+
 	/**
 	 * Construct a new vector.
 	 * 
@@ -31,6 +39,34 @@ public class Vector {
 	private Vector(double x, double y) {
 		this.x = x;
 		this.y = y;
+		magnitude = Math.sqrt(x * x + y * y);
+		angle = Math.toDegrees(Math.atan2(y, x));
+	}
+
+	/**
+	 * Create a new Vector supplying polar coordinates
+	 * 
+	 * @param magnitude the magnitude of the vector
+	 * @param angle the angle of the vector, relative to 'west' (1,0) (in
+	 *            degrees)
+	 * @return a vector with the given magnitude and angle
+	 */
+	public static Vector polar(double magnitude, double angle) {
+		double rads = Math.toRadians(angle);
+		double x = magnitude * Math.cos(rads);
+		double y = magnitude * Math.sin(rads);
+		return new Vector(x, y);
+	}
+
+	/**
+	 * Create a new Vector supplying Cartesian coordinates.
+	 * 
+	 * @param x the x coordinate of the vector
+	 * @param y the y coordinate of the vector
+	 * @return a vector with the given coordinates
+	 */
+	public static Vector cartesian(double x, double y) {
+		return new Vector(x, y);
 	}
 
 	/**
@@ -76,14 +112,15 @@ public class Vector {
 	 * @return the magnitude of the vector
 	 */
 	public double getMagnitude() {
-		return Math.sqrt(x * x + y * y);
+		return magnitude;
 	}
 
 	/**
-	 * @return the angle of the vector, as measured from 'west' - vector (1,0)
+	 * @return the angle of the vector, as measured from 'west' - vector (1,0),
+	 *         in degrees
 	 */
 	public double getAngle() {
-		return Math.atan2(y, x);
+		return angle;
 	}
 
 	/**
@@ -98,32 +135,6 @@ public class Vector {
 	 */
 	public double getY() {
 		return y;
-	}
-
-	/**
-	 * Create a new Vector supplying polar coordinates
-	 * 
-	 * @param magnitude the magnitude of the vector
-	 * @param angle the angle of the vector, relative to 'west' (1,0) (in
-	 *            degrees)
-	 * @return a vector with the given magnitude and angle
-	 */
-	public static Vector polar(double magnitude, double angle) {
-		double rads = Math.toRadians(angle);
-		double x = magnitude * Math.cos(rads);
-		double y = magnitude * Math.sin(rads);
-		return new Vector(x, y);
-	}
-
-	/**
-	 * Create a new Vector supplying Cartesian coordinates.
-	 * 
-	 * @param x the x coordinate of the vector
-	 * @param y the y coordinate of the vector
-	 * @return a vector with the given coordinates
-	 */
-	public static Vector cartesian(double x, double y) {
-		return new Vector(x, y);
 	}
 
 	/**
