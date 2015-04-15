@@ -67,6 +67,7 @@ public abstract class GameFieldEntity {
 		
 		if (val) {
 			System.out.println("Collision! " + this + " vs " + other);
+
 		}
 		return val;
 	}

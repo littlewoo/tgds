@@ -250,3 +250,4 @@ public class PongGame implements Game {
 		return new Wall(Vector.cartesian(x, y), width);
 	}
 }
+
