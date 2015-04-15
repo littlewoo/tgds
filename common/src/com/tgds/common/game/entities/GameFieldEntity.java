@@ -9,6 +9,7 @@ package com.tgds.common.game.entities;
 
 import java.awt.Color;
 import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
 import com.tgds.common.util.Vector;
@@ -26,7 +27,7 @@ public abstract class GameFieldEntity {
 	/** the location of this object, within its field. */
 	private Vector loc;
 
-	/** the shape of this object, centred on its loc */
+	/** the shape of this object, centred on 0,0 */
 	private Shape shape;
 
 	/**
@@ -55,21 +56,19 @@ public abstract class GameFieldEntity {
 	 * @return true if the two objects intersect
 	 */
 	public boolean checkCollision(GameFieldEntity other) {
-		Shape thisShape = this.getShape();
-		Shape otherShape = other.getShape();
+		Shape thisShape = this.getShapeInLocation();
+		Shape otherShape = other.getShapeInLocation();
 
-		Rectangle2D thisRect = thisShape.getBounds2D();
-		Rectangle2D otherRect = otherShape.getBounds2D();
-
-		if (thisRect.getX() < otherRect.getX() + otherRect.getWidth() &&
-		        thisRect.getX() + thisRect.getWidth() > otherRect.getCenterX()
-		        &&
-		        thisRect.getY() < otherRect.getY() + otherRect.getHeight() &&
-		        thisRect.getHeight() + thisRect.getY() > otherRect.getY()) {
-			System.out.println("" + this + "\t\t collided with \t\t" + other);
-			return true;
+		if (this == other) {
+			return false;
 		}
-		return false;
+		
+		boolean val = thisShape.intersects(otherShape.getBounds2D());
+		
+		if (val) {
+			System.out.println("Collision! " + this + " vs " + other);
+		}
+		return val;
 	}
 
 	/**
@@ -112,6 +111,15 @@ public abstract class GameFieldEntity {
 	 */
 	public Shape getShape() {
 		return shape;
+	}
+	
+	/**
+	 * @return the shape of this object, in the proper location (i.e. the x and y values of the shape are offset from 0,0 by the entity's location)
+	 */
+	public Shape getShapeInLocation() {
+		AffineTransform at = new AffineTransform();
+		at.translate(loc.getX(), loc.getY());
+		return at.createTransformedShape(shape);
 	}
 
 	/**
