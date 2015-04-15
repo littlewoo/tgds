@@ -14,6 +14,7 @@ import java.awt.Shape;
 import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.game.entities.MobileGameFieldEntity;
 import com.tgds.common.util.Vector;
+import com.tgds.pong.game.Wall;
 
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player
@@ -27,9 +28,6 @@ public class Paddle extends MobileGameFieldEntity {
 	private static final int WIDTH = 20;
 	/** the height of the paddle */
 	private static final int HEIGHT = 100;
-
-	/** the number of pixels the paddle moves each move */
-	private static final int SPEED = 5;
 
 	/**
 	 * Construct a new paddle
@@ -47,12 +45,14 @@ public class Paddle extends MobileGameFieldEntity {
 	public boolean detectCollision(GameFieldEntity other) {
 		if (this.checkCollision(other))
 		{
-			// TODO: REACT
-			return true;
-		} else if (!this.checkCollision(other)) {
-			return true;
+			if (other instanceof Wall) {
+				double x = 0;
+				double y = - getVelocity().getY();
+				setVelocity(Vector.cartesian(x,y));
+				double accY = - getAcceleration().getY();
+				setAcceleration(Vector.cartesian(0,  accY/2));
+			}
 		}
-
 		return false;
 	}
 

@@ -10,7 +10,6 @@ package com.tgds.common.game.entities;
 import java.awt.Color;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 
 import com.tgds.common.util.Vector;
 

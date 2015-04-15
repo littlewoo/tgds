@@ -37,13 +37,14 @@ public class Ball extends MobileGameFieldEntity {
 	public boolean detectCollision(GameFieldEntity other) {
 		if(this.checkCollision(other))
 		{
+			double x = getVelocity().getX();
+			double y = getVelocity().getY();
 			if (other instanceof Paddle) {
-				double newX = getVelocity().getX();
-				setVelocity(Vector.cartesian(newX, getVelocity().getY()));
+				x = - getVelocity().getX();
 			} else if (other instanceof Wall) {
-				double newY = getVelocity().getY();
-				
+				y = - getVelocity().getY();
 			}
+			setVelocity(Vector.cartesian(x, y));
 		}
 		return false;
 	}
