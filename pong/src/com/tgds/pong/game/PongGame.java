@@ -75,6 +75,8 @@ public class PongGame implements Game {
 		field.addEntity(p1control.getPaddle());
 		field.addEntity(p2control.getPaddle());
 
+		updateList.add(p1control);
+		updateList.add(p2control);
 		updateList.add(p1control.getPaddle());
 		updateList.add(p2control.getPaddle());
 		updateList.add(ballController.getBall());
