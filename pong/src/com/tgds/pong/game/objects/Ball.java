@@ -7,6 +7,7 @@ import java.awt.Shape;
 import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.game.entities.MobileGameFieldEntity;
 import com.tgds.common.util.Vector;
+import com.tgds.pong.game.Wall;
 
 /**
  * The ball used to score. Changes velocity only when hitting walls or paddles.
@@ -36,12 +37,14 @@ public class Ball extends MobileGameFieldEntity {
 	public boolean detectCollision(GameFieldEntity other) {
 		if(this.checkCollision(other))
 		{
-			//TODO: REACT
-			return true;
-		} else if (!this.checkCollision(other)) {
-			return true;
+			if (other instanceof Paddle) {
+				double newX = getVelocity().getX();
+				setVelocity(Vector.cartesian(newX, getVelocity().getY()));
+			} else if (other instanceof Wall) {
+				double newY = getVelocity().getY();
+				
+			}
 		}
-		
 		return false;
 	}
 

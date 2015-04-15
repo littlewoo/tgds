@@ -58,18 +58,8 @@ public abstract class GameFieldEntity {
 	public boolean checkCollision(GameFieldEntity other) {
 		Shape thisShape = this.getShapeInLocation();
 		Shape otherShape = other.getShapeInLocation();
-
-		if (this == other) {
-			return false;
-		}
 		
-		boolean val = thisShape.intersects(otherShape.getBounds2D());
-		
-		if (val) {
-			System.out.println("Collision! " + this + " vs " + other);
-
-		}
-		return val;
+		return thisShape.intersects(otherShape.getBounds2D());
 	}
 
 	/**

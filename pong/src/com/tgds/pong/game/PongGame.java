@@ -104,6 +104,10 @@ public class PongGame implements Game {
 						}
 						for (GameFieldEntity obj : field.getEntities()) {
 							for (GameFieldEntity other : field.getEntities()) {
+								if (obj == other) {
+									continue;
+								}
+								
 								obj.detectCollision(other);
 							}
 						}
