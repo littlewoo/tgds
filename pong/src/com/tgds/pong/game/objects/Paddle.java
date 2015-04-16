@@ -28,6 +28,8 @@ public class Paddle extends MobileGameFieldEntity {
 	private static final int WIDTH = 20;
 	/** the height of the paddle */
 	private static final int HEIGHT = 100;
+	
+	private Vector previousLoc;
 
 	/**
 	 * Construct a new paddle
@@ -36,6 +38,7 @@ public class Paddle extends MobileGameFieldEntity {
 	 */
 	public Paddle(Vector loc) {
 		super(loc, Paddle.getPaddleShape(), true);
+		previousLoc = loc;
 	}
 
 	/**
@@ -46,12 +49,16 @@ public class Paddle extends MobileGameFieldEntity {
 		if (this.checkCollision(other))
 		{
 			if (other instanceof Wall) {
-				double x = 0;
+				setLoc(previousLoc);
+				setVelocity(Vector.cartesian(0, 0));
+				/*double x = 0;
 				double y = - getVelocity().getY();
 				setVelocity(Vector.cartesian(x,y));
 				double accY = - getAcceleration().getY();
-				setAcceleration(Vector.cartesian(0,  accY/2));
+				setAcceleration(Vector.cartesian(0,  accY/2));*/
 			}
+		} else {
+			previousLoc = getLoc();
 		}
 		return false;
 	}
@@ -71,7 +78,6 @@ public class Paddle extends MobileGameFieldEntity {
 	 */
 	@Override
 	public Color getColour() {
-		// TODO Auto-generated method stub
 		return Color.WHITE;
 	}
 }

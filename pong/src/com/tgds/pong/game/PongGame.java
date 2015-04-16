@@ -99,9 +99,7 @@ public class PongGame implements Game {
 			public void run() {
 				while (true) {
 					if (isRunning()) {
-						for (GameTimedEntity obj : updateList) {
-							obj.update();
-						}
+						//collision detection
 						for (GameFieldEntity obj : field.getEntities()) {
 							for (GameFieldEntity other : field.getEntities()) {
 								if (obj == other) {
@@ -111,10 +109,19 @@ public class PongGame implements Game {
 								obj.detectCollision(other);
 							}
 						}
+						
+						//update locations
+						for (GameTimedEntity obj : updateList) {
+							obj.update();
+						}
+						
+						//check for win
 						if (players.get(0).getScore() == 10
 						        || players.get(1).getScore() == 10) {
 							setRunning(false);
 						}
+						
+						//wait
 						try {
 							Thread.sleep(stepTime);
 						} catch (InterruptedException e) {
