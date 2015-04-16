@@ -50,15 +50,14 @@ public class Paddle extends MobileGameFieldEntity {
 		{
 			if (other instanceof Wall) {
 				setLoc(previousLoc);
-				setVelocity(Vector.cartesian(0, 0));
-				/*double x = 0;
+				double x = 0;
 				double y = - getVelocity().getY();
 				setVelocity(Vector.cartesian(x,y));
-				double accY = - getAcceleration().getY();
-				setAcceleration(Vector.cartesian(0,  accY/2));*/
 			}
 		} else {
-			previousLoc = getLoc();
+			if (other instanceof Wall) {
+				previousLoc = getLoc();
+			}
 		}
 		return false;
 	}
