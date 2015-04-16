@@ -20,7 +20,6 @@ public class Wall extends GameFieldEntity {
 	 */
 	@Override
 	public Color getColour() {
-		// TODO change this
 		return Color.BLACK;
 	}
 
