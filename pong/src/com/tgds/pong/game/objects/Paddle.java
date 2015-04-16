@@ -14,7 +14,6 @@ import java.awt.Shape;
 import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.game.entities.MobileGameFieldEntity;
 import com.tgds.common.util.Vector;
-import com.tgds.pong.game.Wall;
 
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player

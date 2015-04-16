@@ -19,6 +19,7 @@ import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.controllers.BallController;
 import com.tgds.pong.game.controllers.PaddleController;
 import com.tgds.pong.game.objects.Net;
+import com.tgds.pong.game.objects.Wall;
 
 /**
  * The game.

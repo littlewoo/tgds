@@ -7,7 +7,6 @@ import java.awt.Shape;
 import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.game.entities.MobileGameFieldEntity;
 import com.tgds.common.util.Vector;
-import com.tgds.pong.game.Wall;
 
 /**
  * The ball used to score. Changes velocity only when hitting walls or paddles.
