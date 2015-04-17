@@ -8,11 +8,8 @@ import com.tgds.common.util.Vector;
 
 public class Wall extends GameFieldEntity {
 
-	/** the height of the paddle */
-	private static final int HEIGHT = 1;
-
-	public Wall(Vector loc, int width) {
-		super(loc, new Rectangle(width, HEIGHT), true);
+	public Wall(Vector loc, int width, int height) {
+		super(loc, new Rectangle(width, height), true);
 	}
 
 	/**

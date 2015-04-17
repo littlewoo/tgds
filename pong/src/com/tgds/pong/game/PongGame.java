@@ -14,10 +14,13 @@ import com.tgds.common.game.Game;
 import com.tgds.common.game.GameField;
 import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.game.entities.GameTimedEntity;
+import com.tgds.common.game.scoring.ScoreChangeListener;
+import com.tgds.common.game.scoring.ScoreKeeper;
 import com.tgds.common.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.controllers.BallController;
 import com.tgds.pong.game.controllers.PaddleController;
+import com.tgds.pong.game.objects.Goal;
 import com.tgds.pong.game.objects.Net;
 import com.tgds.pong.game.objects.Wall;
 
@@ -87,6 +90,18 @@ public class PongGame implements Game {
 
 		field.addEntity(createWallsAndGoals(Side.NORTH));
 		field.addEntity(createWallsAndGoals(Side.SOUTH));
+		field.addEntity(createWallsAndGoals(Side.EAST));
+		field.addEntity(createWallsAndGoals(Side.WEST));
+
+		ScoreChangeListener resetter = new ScoreChangeListener() {
+			@Override
+			public void onScoreChanged(ScoreKeeper scoreKeeper, int newScore) {
+				ballController.resetBall(Vector.cartesian(
+				        getHorizontalCentre(), getVerticalCentre()));
+			}
+		};
+		p1.addScoreChangeListener(resetter);
+		p2.addScoreChangeListener(resetter);
 
 		setRunning(true);
 		startGameLoop();
@@ -102,29 +117,29 @@ public class PongGame implements Game {
 			public void run() {
 				while (true) {
 					if (isRunning()) {
-						//collision detection
+						// collision detection
 						for (GameFieldEntity obj : field.getEntities()) {
 							for (GameFieldEntity other : field.getEntities()) {
 								if (obj == other) {
 									continue;
 								}
-								
+
 								obj.detectCollision(other);
 							}
 						}
-						
-						//update locations
+
+						// update locations
 						for (GameTimedEntity obj : updateList) {
 							obj.update();
 						}
-						
-						//check for win
+
+						// check for win
 						if (players.get(0).getScore() == 10
 						        || players.get(1).getScore() == 10) {
 							setRunning(false);
 						}
-						
-						//wait
+
+						// wait
 						try {
 							Thread.sleep(stepTime);
 						} catch (InterruptedException e) {
@@ -151,6 +166,7 @@ public class PongGame implements Game {
 	 * 
 	 * @param object the game object to add
 	 */
+	@Override
 	public void addTimedObject(GameTimedEntity object) {
 		updateList.add(object);
 	}
@@ -248,20 +264,29 @@ public class PongGame implements Game {
 	 * @return the net
 	 */
 	private Wall createWallsAndGoals(Side side) {
+		int x = 0;
 		int y = 0;
+		int width = 1;
+		int height = 1;
 		if (side == Side.NORTH) {
 			y = 0;
+			width = field.getWidth();
+			return new Wall(Vector.cartesian(x, y), width, height);
 		} else if (side == Side.SOUTH) {
 			y = field.getHeight();
+			width = field.getWidth();
+			return new Wall(Vector.cartesian(x, y), width, height);
 		} else if (side == Side.EAST) {
-			// GOAL
+			x = field.getWidth();
+			height = field.getHeight();
+			return new Goal(Vector.cartesian(x, y), width, height, players
+			        .get(0));
 		} else if (side == Side.WEST) {
-			// GOOOOOOOOOAL
+			x = 0;
+			height = field.getHeight();
+			return new Goal(Vector.cartesian(x, y), width, height, players
+			        .get(1));
 		}
-
-		int x = 0;
-		int width = field.getWidth();
-		return new Wall(Vector.cartesian(x, y), width);
+		throw new IllegalArgumentException("Invalid side supplied.");
 	}
 }
-

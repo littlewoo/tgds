@@ -31,46 +31,64 @@ public class Ball extends MobileGameFieldEntity {
 	}
 
 	/**
+	 * Put the ball in a new starting location
+	 * 
+	 * @param loc the location to reset the ball into
+	 * @param velocity the ball's velocity
+	 */
+	public void resetBall(Vector loc) {
+		setLoc(loc);
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean detectCollision(GameFieldEntity other) {
-		if(this.checkCollision(other))
+		if (this.checkCollision(other))
 		{
 			double x = getVelocity().getX();
 			double y = getVelocity().getY();
 			if (other instanceof Paddle) {
-				
+
 				Rectangle2D thisShape = this.getShapeInLocation().getBounds2D();
 				double xLocation = thisShape.getX();
 				double yLocation = thisShape.getY();
-				
-				Rectangle2D otherShape = other.getShapeInLocation().getBounds2D();
 
-				// Get the intersection rectangle to find out which way to bounce.
-		        Rectangle2D iRect = thisShape.createIntersection(otherShape);
-		        
-		        if ((xLocation+(WIDTH/2)) < (iRect.getX()+(iRect.getWidth()/2))) {
-		        	// If we hit on the left side, go left (negative x velocity).
-		        	x = -Math.abs(x);
-		        	
-		        } else if ((xLocation+(WIDTH/2)) > (iRect.getX()+(iRect.getWidth()/2))) {
-		        	// If we hit on the right side, go right (positive x velocity).
-		        	x = Math.abs(x);
-		        	
-		        } else if ((yLocation+(HEIGHT/2)) < (iRect.getY()+(iRect.getHeight()/2))) {
-		        	// If we hit on the top, go up.
-		        	y = -Math.abs(y);
-		        	
-		        } else if ((yLocation+(HEIGHT/2)) > (iRect.getY()+(iRect.getHeight()/2))) {
-		        	// If we hit on the bottom, go down.
-		        	y = Math.abs(y);
-		        }
-				
+				Rectangle2D otherShape = other.getShapeInLocation()
+				        .getBounds2D();
+
+				// Get the intersection rectangle to find out which way to
+				// bounce.
+				Rectangle2D iRect = thisShape.createIntersection(otherShape);
+
+				if ((xLocation + (WIDTH / 2)) < (iRect.getX() + (iRect
+				        .getWidth() / 2))) {
+					// If we hit on the left side, go left (negative x
+					// velocity).
+					x = -Math.abs(x);
+
+				} else if ((xLocation + (WIDTH / 2)) > (iRect.getX() + (iRect
+				        .getWidth() / 2))) {
+					// If we hit on the right side, go right (positive x
+					// velocity).
+					x = Math.abs(x);
+
+				} else if ((yLocation + (HEIGHT / 2)) < (iRect.getY() + (iRect
+				        .getHeight() / 2))) {
+					// If we hit on the top, go up.
+					y = -Math.abs(y);
+
+				} else if ((yLocation + (HEIGHT / 2)) > (iRect.getY() + (iRect
+				        .getHeight() / 2))) {
+					// If we hit on the bottom, go down.
+					y = Math.abs(y);
+				}
+
 			} else if (other instanceof Wall) {
-				y = - getVelocity().getY();
-			}	        
-			
+				y = -getVelocity().getY();
+			}
+
 			setVelocity(Vector.cartesian(x, y));
 		}
 		return false;

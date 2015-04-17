@@ -36,6 +36,14 @@ public class BallController {
 	}
 
 	/**
+	 * Reset the ball
+	 */
+	public void resetBall(Vector loc) {
+		ball.resetBall(loc);
+		setStartVelocity();
+	}
+
+	/**
 	 * moves ball in direction provided
 	 */
 	public void moveBall(Vector velocityVector) {
@@ -64,28 +72,28 @@ public class BallController {
 		ball.setVelocity(startVelocity);
 
 	}
-	
+
 	public void reactToCollision(GameFieldEntity otherObject) {
 		Class<?> otherClass = otherObject.getClass();
 		if (otherClass == Paddle.class) {
 			Vector initialVelocity = ball.getVelocity();
-			
+
 			double initialX = initialVelocity.getX();
 			double initialY = initialVelocity.getY();
-			
-			//reversing x to bounce it off in the horizontal plane
+
+			// reversing x to bounce it off in the horizontal plane
 			Vector newVelocity = Vector.cartesian(-initialX, initialY);
-			
+
 			ball.setVelocity(newVelocity);
 		} else if (otherClass == Wall.class) {
 			Vector initialVelocity = ball.getVelocity();
-			
+
 			double initialX = initialVelocity.getX();
 			double initialY = initialVelocity.getY();
-			
-			//reversing y to bounce it off in the vertical plane
+
+			// reversing y to bounce it off in the vertical plane
 			Vector newVelocity = Vector.cartesian(initialX, -initialY);
-			
+
 			ball.setVelocity(newVelocity);
 		}
 	}
