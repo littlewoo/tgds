@@ -28,4 +28,8 @@ public interface Game {
 	 */
 	public void addTimedObject(GameTimedEntity gameTimedEntity);
 
+	public abstract boolean isRunning();
+
+	public abstract void setRunning(boolean value);
+
 }
