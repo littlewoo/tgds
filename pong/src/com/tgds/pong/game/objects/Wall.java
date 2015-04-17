@@ -6,8 +6,23 @@ import java.awt.Rectangle;
 import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.util.Vector;
 
+/**
+ * Walls surrounding the playing area.
+ * 
+ * @author John Littlewood
+ */
 public class Wall extends GameFieldEntity {
 
+	/** the thickness of a wall */
+	public static final int THICKNESS = 1;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param loc the top left location of the wall
+	 * @param width the width of the wall
+	 * @param height the height of the wall
+	 */
 	public Wall(Vector loc, int width, int height) {
 		super(loc, new Rectangle(width, height), true);
 	}
