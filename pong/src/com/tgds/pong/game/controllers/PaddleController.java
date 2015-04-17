@@ -10,6 +10,7 @@ package com.tgds.pong.game.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.tgds.common.game.entities.GameTimedEntity;
 import com.tgds.common.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.PongGame;
@@ -21,7 +22,7 @@ import com.tgds.pong.game.objects.Paddle;
  * 
  * @author jdl
  */
-public class PaddleController implements PlayerInputReceiver {
+public class PaddleController implements PlayerInputReceiver, GameTimedEntity {
 
 	/** the horizontal distance from the goal line that the paddle sits at */
 	private static final int X_DISTANCE = 25;
@@ -47,6 +48,7 @@ public class PaddleController implements PlayerInputReceiver {
 
 	/** the paddle which is controlled by this controller */
 	private final Paddle paddle;
+	
 
 	/**
 	 * Constructor - create a new controller and the paddle to go along with it.
@@ -74,13 +76,32 @@ public class PaddleController implements PlayerInputReceiver {
 		paddle.setFriction(true);
 		paddle.setCoefficientOfFriction(FRICTION_COEFFICIENT);
 	}
+	
+	/** true if the paddle should start to move on the next update */
+	private Direction startMoving = null;
+	/** true if the paddle should stop moving on the next update */
+	private boolean stopMoving = false;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void update() {
+		if (startMoving != null) {
+			paddle.setAcceleration(ACCELERATION_VECTORS.get(startMoving));
+			startMoving = null;
+		} else if (stopMoving) {
+			paddle.setAcceleration(Vector.polar(0.0, 0.0));
+			stopMoving = false;
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void movePaddle(Direction direction) {
-		paddle.setAcceleration(ACCELERATION_VECTORS.get(direction));
+		startMoving = direction;
 	}
 	
 	/**
@@ -88,7 +109,7 @@ public class PaddleController implements PlayerInputReceiver {
 	 */
 	@Override
 	public void stopPaddle() {
-		paddle.setAcceleration(Vector.polar(0.0, 0.0));
+		stopMoving = true;
 	}
 
 	/**
@@ -104,4 +125,6 @@ public class PaddleController implements PlayerInputReceiver {
 	public Paddle getPaddle() {
 		return paddle;
 	}
+
+
 }
