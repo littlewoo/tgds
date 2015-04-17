@@ -1,6 +1,10 @@
 *.class
-bin/*
+*.jar
+*/bin/*
+*/target/*
+
 
 */.idea/*
 *.metadata/*
 .recommenders/*
+*.prefs
