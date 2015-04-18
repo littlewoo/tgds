@@ -78,8 +78,47 @@ public class BallControllerTest {
 	}
 	
 	@Test
-	public void testReactToCollision() {
+	public void testReactToCollisionWall() {
 		fail("Not yet implemented"); // TODO write test
 	}
-
+	
+	@Test
+	public void testReactToCollisionPaddleTop() {
+		fail("Not yet implemented"); // TODO write test
+	}
+	
+	@Test
+	public void testReactToCollisionPaddleBottom() {
+		fail("Not yet implemented"); // TODO write test
+	}
+	
+	@Test
+	public void testReactToCollisionPaddleTopLeftCorner() {
+		fail("Not yet implemented"); // TODO write test
+	}
+	
+	@Test
+	public void testReactToCollisionPaddleLeftSide() {
+		fail("Not yet implemented"); // TODO write test
+	}
+	
+	@Test
+	public void testReactToCollisionPaddleBottomLeftCorner() {
+		fail("Not yet implemented"); // TODO write test
+	}
+	
+	@Test
+	public void testReactToCollisionPaddleTopRightCorner() {
+		fail("Not yet implemented"); // TODO write test
+	}
+	
+	@Test
+	public void testReactToCollisionPaddleRightSide() {
+		fail("Not yet implemented"); // TODO write test
+	}
+	
+	@Test
+	public void testReactToCollisionPaddleBottomRightCorner() {
+		fail("Not yet implemented"); // TODO write test
+	}
 }
