@@ -206,9 +206,9 @@ public abstract class MobileGameFieldEntity extends GameFieldEntity implements
 	 */
 	@Override
 	public boolean detectCollision(GameFieldEntity other) {
+		//TODO fix this - pretty sure this logic isn't right
 		if (this.checkCollision(other))
 		{
-			// TODO: REACT
 			return true;
 		} else if (!this.checkCollision(other)) {
 			return true;
