@@ -18,6 +18,7 @@ import org.junit.Test;
 import com.tgds.common.util.Vector;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.objects.Ball;
+import com.tgds.pong.game.objects.Wall;
 
 public class BallControllerTest {
 	
@@ -75,50 +76,5 @@ public class BallControllerTest {
 		
 		assertTrue("testing start velocity", ballController.getBall().getVelocity().getMagnitude() == 5);
 		assertTrue("testing start velocity", ballController.getBall().getVelocity().getAngle() == 45);
-	}
-	
-	@Test
-	public void testReactToCollisionWall() {
-		fail("Not yet implemented"); // TODO write test
-	}
-	
-	@Test
-	public void testReactToCollisionPaddleTop() {
-		fail("Not yet implemented"); // TODO write test
-	}
-	
-	@Test
-	public void testReactToCollisionPaddleBottom() {
-		fail("Not yet implemented"); // TODO write test
-	}
-	
-	@Test
-	public void testReactToCollisionPaddleTopLeftCorner() {
-		fail("Not yet implemented"); // TODO write test
-	}
-	
-	@Test
-	public void testReactToCollisionPaddleLeftSide() {
-		fail("Not yet implemented"); // TODO write test
-	}
-	
-	@Test
-	public void testReactToCollisionPaddleBottomLeftCorner() {
-		fail("Not yet implemented"); // TODO write test
-	}
-	
-	@Test
-	public void testReactToCollisionPaddleTopRightCorner() {
-		fail("Not yet implemented"); // TODO write test
-	}
-	
-	@Test
-	public void testReactToCollisionPaddleRightSide() {
-		fail("Not yet implemented"); // TODO write test
-	}
-	
-	@Test
-	public void testReactToCollisionPaddleBottomRightCorner() {
-		fail("Not yet implemented"); // TODO write test
 	}
 }
