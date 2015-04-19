@@ -9,16 +9,16 @@
  */
 package com.tgds.pong.game.controllers;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.tgds.common.util.Vector;
 import com.tgds.pong.game.PongGame;
-import com.tgds.pong.game.objects.Ball;
-import com.tgds.pong.game.objects.Wall;
 
 public class BallControllerTest {
 	

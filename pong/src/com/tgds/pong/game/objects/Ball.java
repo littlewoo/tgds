@@ -72,6 +72,7 @@ public class Ball extends MobileGameFieldEntity {
 			}	        
 			
 			setVelocity(Vector.cartesian(x, y));
+			return true;
 		}
 		return false;
 	}
