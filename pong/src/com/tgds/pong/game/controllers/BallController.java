@@ -1,7 +1,7 @@
 package com.tgds.pong.game.controllers;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.util.Vector;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.objects.Ball;
 import com.tgds.pong.game.objects.Paddle;

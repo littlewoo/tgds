@@ -9,8 +9,8 @@ package com.tgds.pong.game.controllers;
 
 import java.util.Random;
 
-import com.tgds.common.game.entities.GameTimedEntity;
-import com.tgds.common.ui.input.StoppableCommand;
+import com.tgds.api2d.game.entities.GameTimedEntity;
+import com.tgds.api2d.ui.input.StoppableCommand;
 import com.tgds.pong.game.objects.Ball;
 import com.tgds.pong.game.objects.Paddle;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;

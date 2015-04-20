@@ -5,9 +5,9 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.game.entities.MobileGameFieldEntity;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.game.entities.MobileGameFieldEntity;
+import com.tgds.api2d.util.Vector;
 
 /**
  * The ball used to score. Changes velocity only when hitting walls or paddles.

@@ -10,12 +10,12 @@ package com.tgds.pong.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tgds.common.game.Game;
-import com.tgds.common.game.GameField;
-import com.tgds.common.game.entities.GameTimedEntity;
-import com.tgds.common.game.scoring.ScoreChangeListener;
-import com.tgds.common.game.scoring.ScoreKeeper;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.Game;
+import com.tgds.api2d.game.GameField;
+import com.tgds.api2d.game.entities.GameTimedEntity;
+import com.tgds.api2d.game.scoring.ScoreChangeListener;
+import com.tgds.api2d.game.scoring.ScoreKeeper;
+import com.tgds.api2d.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.controllers.BallController;
 import com.tgds.pong.game.controllers.PaddleController;

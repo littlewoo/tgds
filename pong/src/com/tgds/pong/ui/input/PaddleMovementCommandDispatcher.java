@@ -9,8 +9,8 @@ package com.tgds.pong.ui.input;
 
 import java.util.List;
 
-import com.tgds.common.ui.input.StoppableCommand;
-import com.tgds.common.ui.input.StoppableCommandDispatcher;
+import com.tgds.api2d.ui.input.StoppableCommand;
+import com.tgds.api2d.ui.input.StoppableCommandDispatcher;
 import com.tgds.pong.commands.PaddleMoveCommand;
 import com.tgds.pong.commands.PlayerInputReceiver.Direction;
 import com.tgds.pong.game.Player;

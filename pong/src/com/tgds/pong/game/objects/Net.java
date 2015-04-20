@@ -11,8 +11,8 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.util.Vector;
 
 /**
  * The court's net - a decorative object showing the centre of the court

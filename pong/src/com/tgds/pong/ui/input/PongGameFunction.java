@@ -7,7 +7,7 @@
  */
 package com.tgds.pong.ui.input;
 
-import com.tgds.common.ui.input.InputFunction;
+import com.tgds.api2d.ui.input.InputFunction;
 
 /**
  * enumeration of expected functions

@@ -11,9 +11,9 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.game.entities.MobileGameFieldEntity;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.game.entities.MobileGameFieldEntity;
+import com.tgds.api2d.util.Vector;
 
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player

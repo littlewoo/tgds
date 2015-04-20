@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
-import com.tgds.common.game.scoring.ScoreChangeListener;
-import com.tgds.common.game.scoring.ScoreKeeper;
+import com.tgds.api2d.game.scoring.ScoreChangeListener;
+import com.tgds.api2d.game.scoring.ScoreKeeper;
 import com.tgds.pong.game.Player;
 
 /**

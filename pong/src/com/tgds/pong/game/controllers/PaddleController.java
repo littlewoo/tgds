@@ -10,8 +10,8 @@ package com.tgds.pong.game.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tgds.common.game.entities.GameTimedEntity;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameTimedEntity;
+import com.tgds.api2d.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.Side;
