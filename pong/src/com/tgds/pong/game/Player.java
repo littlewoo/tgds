@@ -10,8 +10,8 @@ package com.tgds.pong.game;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.tgds.common.game.scoring.ScoreChangeListener;
-import com.tgds.common.game.scoring.ScoreKeeper;
+import com.tgds.api2d.game.scoring.ScoreChangeListener;
+import com.tgds.api2d.game.scoring.ScoreKeeper;
 import com.tgds.pong.commands.PlayerInputReceiver;
 
 /**

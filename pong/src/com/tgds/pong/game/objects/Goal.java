@@ -2,9 +2,9 @@ package com.tgds.pong.game.objects;
 
 import java.awt.Color;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.game.scoring.ScoreKeeper;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.game.scoring.ScoreKeeper;
+import com.tgds.api2d.util.Vector;
 
 /**
  * A special type of wall, which registers a goal scored whenever a ball is in

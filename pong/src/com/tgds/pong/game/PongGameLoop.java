@@ -5,9 +5,9 @@
  */
 package com.tgds.pong.game;
 
-import com.tgds.common.game.GameLoop;
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.game.entities.GameTimedEntity;
+import com.tgds.api2d.game.GameLoop;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.game.entities.GameTimedEntity;
 
 /**
  * @author John Littlewood

@@ -12,10 +12,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-import com.tgds.common.config.ConfigurationException;
-import com.tgds.common.config.InputConfig;
-import com.tgds.common.ui.GameFrame;
-import com.tgds.common.ui.input.KeyboardInputHandler;
+import com.tgds.api2d.config.ConfigurationException;
+import com.tgds.api2d.config.InputConfig;
+import com.tgds.api2d.ui.GameFrame;
+import com.tgds.api2d.ui.input.KeyboardInputHandler;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
 import com.tgds.pong.ui.input.PongGameFunction;

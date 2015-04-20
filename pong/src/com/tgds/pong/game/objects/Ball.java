@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
-import java.io.File;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.game.entities.MobileGameFieldEntity;
-import com.tgds.common.ui.sound.SoundPlayer;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.game.entities.MobileGameFieldEntity;
+import com.tgds.api2d.util.Vector;
 
 /**
  * The ball used to score. Changes velocity only when hitting walls or paddles.
@@ -52,9 +50,6 @@ public class Ball extends MobileGameFieldEntity {
 			double x = getVelocity().getX();
 			double y = getVelocity().getY();
 			if (other instanceof Paddle) {
-
-				SoundPlayer.playSound(new File(
-				        "resources/com/tgds/pong/sounds/twang1.wav"));
 
 				Rectangle2D thisShape = this.getShapeInLocation().getBounds2D();
 				double xLocation = thisShape.getX();

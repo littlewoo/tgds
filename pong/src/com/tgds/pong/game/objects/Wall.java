@@ -3,8 +3,8 @@ package com.tgds.pong.game.objects;
 import java.awt.Color;
 import java.awt.Rectangle;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.util.Vector;
 
 /**
  * Walls surrounding the playing area.
