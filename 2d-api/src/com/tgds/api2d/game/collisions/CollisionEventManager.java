@@ -7,6 +7,8 @@ package com.tgds.api2d.game.collisions;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.tgds.api2d.game.entities.GameFieldEntity;
 import com.tgds.api2d.util.Vector;
@@ -25,14 +27,21 @@ public class CollisionEventManager {
 	/** the instance of this singleton class */
 	private static CollisionEventManager INSTANCE = null;
 
-	/** the collection of parties which are interested in collision events */
+	/** the collection of parties which are interested in all collision events */
 	private final Collection<CollisionEventListener> listeners;
+
+	/**
+	 * the collection of listeners which are interested in collision events from
+	 * one entity
+	 */
+	private final Map<GameFieldEntity, Collection<CollisionEventListener>> entityListeners;
 
 	/**
 	 * Private constructor
 	 */
 	private CollisionEventManager() {
 		listeners = new ArrayList<>();
+		entityListeners = new HashMap<>();
 	}
 
 	/**
@@ -57,6 +66,37 @@ public class CollisionEventManager {
 	        Vector location) {
 		CollisionEvent event = new CollisionEvent(reporter, other, location);
 		listeners.forEach(l -> l.onCollisionEvent(event));
+		Collection<CollisionEventListener> specListeners = entityListeners
+		        .get(reporter);
+		if (specListeners != null) {
+			specListeners.forEach(l -> l.onCollisionEvent(event));
+		}
+	}
+
+	/**
+	 * Add a listener for collision events
+	 * 
+	 * @param listener the listener to add
+	 */
+	public void addListener(CollisionEventListener listener) {
+		listeners.add(listener);
+	}
+
+	/**
+	 * Add a listener for collision events, which only wants to be notified of
+	 * collisions involving a specific game entity.
+	 * 
+	 * @param listener the listener to add
+	 * @param entity the entity the listener is interested in
+	 */
+	public void addListener(CollisionEventListener listener,
+	        GameFieldEntity entity) {
+		Collection<CollisionEventListener> els = entityListeners.get(entity);
+		if (els == null) {
+			els = new ArrayList<CollisionEventListener>();
+			entityListeners.put(entity, els);
+		}
+		els.add(listener);
 	}
 
 	/**

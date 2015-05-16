@@ -200,20 +200,4 @@ public abstract class MobileGameFieldEntity extends GameFieldEntity implements
 		accelerate();
 		translate(velocity);
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean detectCollision(GameFieldEntity other) {
-		if (this.checkCollision(other))
-		{
-			// TODO: REACT
-			return true;
-		} else if (!this.checkCollision(other)) {
-			return true;
-		}
-
-		return false;
-	}
 }

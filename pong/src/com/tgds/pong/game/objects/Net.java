@@ -38,9 +38,8 @@ public class Net extends GameFieldEntity {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean detectCollision(GameFieldEntity other) {
+	public void respondToCollision(GameFieldEntity other) {
 		// No response to a collision
-		return false;
 	}
 
 	/**

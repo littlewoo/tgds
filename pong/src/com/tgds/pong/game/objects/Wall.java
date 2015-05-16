@@ -39,7 +39,7 @@ public class Wall extends GameFieldEntity {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean detectCollision(GameFieldEntity other) {
-		return false;
+	public void respondToCollision(GameFieldEntity other) {
+		// no response to a collision
 	}
 }
