@@ -13,14 +13,10 @@ import java.util.List;
 
 import com.tgds.api2d.game.Game;
 import com.tgds.api2d.game.GameField;
-import com.tgds.api2d.game.collisions.CollisionEventManager;
-import com.tgds.api2d.game.collisions.CollisionEventManager.CollisionEvent;
-import com.tgds.api2d.game.collisions.CollisionEventManager.CollisionEventListener;
 import com.tgds.api2d.game.entities.GameTimedEntity;
 import com.tgds.api2d.game.scoring.ScoreChangeListener;
 import com.tgds.api2d.game.scoring.ScoreKeeper;
-import com.tgds.api2d.ui.output.sound.SoundEvent;
-import com.tgds.api2d.ui.output.sound.SoundManager;
+import com.tgds.api2d.ui.output.sound.CollisionSoundPlayer;
 import com.tgds.api2d.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.controllers.BallController;
@@ -238,52 +234,16 @@ public class PongGame implements Game {
 	 * @param ball the ball
 	 */
 	private void initSound(Paddle paddle1, Paddle paddle2, Ball ball) {
-		SoundEvent paddle1Ball = new SoundEvent() {
-		};
-		SoundEvent paddle2Ball = new SoundEvent() {
-		};
-		SoundManager.instance().registerSoundEffect(paddle1Ball,
-		        new File("resources/com/tgds/pong/sounds/pop1.wav"));
-		SoundManager.instance().registerSoundEffect(paddle2Ball,
-		        new File("resources/com/tgds/pong/sounds/pop2.wav"));
-		CollisionEventManager.instance().addListener(
-		        new CollisionEventListener() {
-			        @Override
-			        public void onCollisionEvent(CollisionEvent event) {
-				        if (event.getOther() == ball) {
-					        SoundManager.instance().playSound(paddle1Ball);
-				        }
-			        }
-		        }, paddle1);
-		CollisionEventManager.instance().addListener(
-		        new CollisionEventListener() {
-			        @Override
-			        public void onCollisionEvent(CollisionEvent event) {
-				        if (event.getOther() == ball) {
-					        SoundManager.instance().playSound(paddle2Ball);
-				        }
-			        }
-		        }, paddle2);
+		CollisionSoundPlayer soundPlayer = CollisionSoundPlayer.instance();
 
-		SoundEvent ballWall = new SoundEvent() {
-		};
-		SoundEvent ballGoal = new SoundEvent() {
-		};
-		SoundManager.instance().registerSoundEffect(ballWall,
-		        new File("resources/com/tgds/pong/sounds/twang1.wav"));
-		SoundManager.instance().registerSoundEffect(ballGoal,
-		        new File("resources/com/tgds/pong/sounds/ting.wav"));
-		CollisionEventManager.instance().addListener(
-		        new CollisionEventListener() {
-			        @Override
-			        public void onCollisionEvent(CollisionEvent event) {
-				        if (event.getOther() instanceof Goal) {
-					        SoundManager.instance().playSound(ballGoal);
-				        } else if (event.getOther() instanceof Wall) {
-					        SoundManager.instance().playSound(ballWall);
-				        }
-			        }
-		        }, ball);
+		soundPlayer.addSoundEffect(paddle1, ball.getClass(), new File(
+		        "resources/com/tgds/pong/sounds/pop1.wav"));
+		soundPlayer.addSoundEffect(paddle2, ball.getClass(), new File(
+		        "resources/com/tgds/pong/sounds/pop2.wav"));
+		soundPlayer.addSoundEffect(ball, Goal.class, new File(
+		        "resources/com/tgds/pong/sounds/ting.wav"));
+		soundPlayer.addSoundEffect(ball, Wall.class, new File(
+		        "resources/com/tgds/pong/sounds/bounce.wav"));
 	}
 
 	/**
