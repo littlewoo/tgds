@@ -1,7 +1,6 @@
 package com.tgds.pong.game.controllers;
 
 
-import com.tgds.api2d.game.entities.GameFieldEntity;
 import com.tgds.api2d.util.Vector;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.objects.Ball;
@@ -70,30 +69,5 @@ public class BallController {
 		Vector startVelocity = Vector.polar(SPEED, START_ANGLE);
 		ball.setVelocity(startVelocity);
 
-	}
-
-	public void reactToCollision(GameFieldEntity otherObject) {
-		Class<?> otherClass = otherObject.getClass();
-		if (otherClass == Paddle.class) {
-			Vector initialVelocity = ball.getVelocity();
-
-			double initialX = initialVelocity.getX();
-			double initialY = initialVelocity.getY();
-
-			// reversing x to bounce it off in the horizontal plane
-			Vector newVelocity = Vector.cartesian(-initialX, initialY);
-
-			ball.setVelocity(newVelocity);
-		} else if (otherClass == Wall.class) {
-			Vector initialVelocity = ball.getVelocity();
-
-			double initialX = initialVelocity.getX();
-			double initialY = initialVelocity.getY();
-
-			// reversing y to bounce it off in the vertical plane
-			Vector newVelocity = Vector.cartesian(initialX, -initialY);
-
-			ball.setVelocity(newVelocity);
-		}
 	}
 }

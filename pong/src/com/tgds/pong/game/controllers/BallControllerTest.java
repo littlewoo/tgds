@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.util.Vector;
 import com.tgds.pong.game.PongGame;
 
 public class BallControllerTest {

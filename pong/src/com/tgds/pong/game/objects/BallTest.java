@@ -1,6 +1,8 @@
 package com.tgds.pong.game.objects;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -11,7 +13,7 @@ import java.awt.geom.AffineTransform;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.util.Vector;
 
 public class BallTest {
 	
