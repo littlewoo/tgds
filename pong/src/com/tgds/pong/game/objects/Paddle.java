@@ -11,9 +11,9 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.game.entities.MobileGameFieldEntity;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.game.entities.MobileGameFieldEntity;
+import com.tgds.api2d.util.Vector;
 
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player
@@ -27,7 +27,7 @@ public class Paddle extends MobileGameFieldEntity {
 	private static final int WIDTH = 20;
 	/** the height of the paddle */
 	private static final int HEIGHT = 100;
-	
+
 	private Vector previousLoc;
 
 	/**
@@ -50,8 +50,8 @@ public class Paddle extends MobileGameFieldEntity {
 			if (other instanceof Wall) {
 				setLoc(previousLoc);
 				double x = 0;
-				double y = - getVelocity().getY() - 1; //-1 so it is on screen
-				setVelocity(Vector.cartesian(x,y));
+				double y = -getVelocity().getY() - 1; // -1 so it is on screen
+				setVelocity(Vector.cartesian(x, y));
 			}
 		} else {
 			if (other instanceof Wall) {

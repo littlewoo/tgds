@@ -7,7 +7,7 @@
  */
 package com.tgds.pong.commands;
 
-import com.tgds.common.ui.input.Command;
+import com.tgds.api2d.ui.input.Command;
 import com.tgds.pong.game.Player;
 
 /**

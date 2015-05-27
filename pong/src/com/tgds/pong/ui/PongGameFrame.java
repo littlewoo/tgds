@@ -7,17 +7,19 @@
  */
 package com.tgds.pong.ui;
 
+import java.awt.BorderLayout;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-import com.tgds.common.config.ConfigurationException;
-import com.tgds.common.config.InputConfig;
-import com.tgds.common.ui.GameFrame;
-import com.tgds.common.ui.input.KeyboardInputHandler;
+import com.tgds.api2d.config.ConfigurationException;
+import com.tgds.api2d.config.InputConfig;
+import com.tgds.api2d.ui.GameFrame;
+import com.tgds.api2d.ui.input.KeyboardInputHandler;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
 import com.tgds.pong.ui.input.PongGameFunction;
+import com.tgds.pong.ui.output.ScorePanel;
 
 /**
  * Main frame and method for the game of Pong.
@@ -44,6 +46,7 @@ public class PongGameFrame extends GameFrame {
 		KeyboardInputHandler<PongGameFunction> handler = new KeyboardInputHandler<>(
 		        config,
 		        new PaddleMovementCommandDispatcher(game.getPlayers()));
+		super.setSurroundingContent(new ScorePanel(game.getPlayers()), BorderLayout.NORTH);
 		super.addKeyboardInputHandler(handler);
 	}
 

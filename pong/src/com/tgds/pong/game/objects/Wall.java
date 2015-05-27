@@ -3,16 +3,28 @@ package com.tgds.pong.game.objects;
 import java.awt.Color;
 import java.awt.Rectangle;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.entities.GameFieldEntity;
+import com.tgds.api2d.util.Vector;
 
+/**
+ * Walls surrounding the playing area.
+ * 
+ * @author John Littlewood
+ */
 public class Wall extends GameFieldEntity {
 
-	/** the height of the paddle */
-	private static final int HEIGHT = 1;
+	/** the thickness of a wall */
+	public static final int THICKNESS = 1;
 
-	public Wall(Vector loc, int width) {
-		super(loc, new Rectangle(width, HEIGHT), true);
+	/**
+	 * Constructor
+	 * 
+	 * @param loc the top left location of the wall
+	 * @param width the width of the wall
+	 * @param height the height of the wall
+	 */
+	public Wall(Vector loc, int width, int height) {
+		super(loc, new Rectangle(width, height), true);
 	}
 
 	/**

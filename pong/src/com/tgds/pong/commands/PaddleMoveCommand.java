@@ -7,7 +7,7 @@
  */
 package com.tgds.pong.commands;
 
-import com.tgds.common.ui.input.StoppableCommand;
+import com.tgds.api2d.ui.input.StoppableCommand;
 import com.tgds.pong.commands.PlayerInputReceiver.Direction;
 import com.tgds.pong.game.Player;
 

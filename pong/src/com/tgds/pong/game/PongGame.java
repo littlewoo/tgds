@@ -10,14 +10,16 @@ package com.tgds.pong.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tgds.common.game.Game;
-import com.tgds.common.game.GameField;
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.game.entities.GameTimedEntity;
-import com.tgds.common.util.Vector;
+import com.tgds.api2d.game.Game;
+import com.tgds.api2d.game.GameField;
+import com.tgds.api2d.game.entities.GameTimedEntity;
+import com.tgds.api2d.game.scoring.ScoreChangeListener;
+import com.tgds.api2d.game.scoring.ScoreKeeper;
+import com.tgds.api2d.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.controllers.BallController;
 import com.tgds.pong.game.controllers.PaddleController;
+import com.tgds.pong.game.objects.Goal;
 import com.tgds.pong.game.objects.Net;
 import com.tgds.pong.game.objects.Wall;
 
@@ -44,10 +46,10 @@ public class PongGame implements Game {
 	private BallController ballController = null;
 
 	/** all the objects within the game that update with time */
-	private final List<GameTimedEntity> updateList = new ArrayList<>();
+	final List<GameTimedEntity> updateList = new ArrayList<>();
 
 	/** the players playing the game */
-	private final List<Player> players = new ArrayList<>();
+	final List<Player> players = new ArrayList<>();
 
 	/** whether the game is currently running or not */
 	private boolean running = false;
@@ -85,8 +87,17 @@ public class PongGame implements Game {
 
 		ballController.setStartVelocity();
 
-		field.addEntity(createWallsAndGoals(Side.NORTH));
-		field.addEntity(createWallsAndGoals(Side.SOUTH));
+		createWallsAndGoals();
+
+		ScoreChangeListener resetter = new ScoreChangeListener() {
+			@Override
+			public void onScoreChanged(ScoreKeeper scoreKeeper, int newScore) {
+				ballController.resetBall(Vector.cartesian(
+				        getHorizontalCentre(), getVerticalCentre()));
+			}
+		};
+		p1.addScoreChangeListener(resetter);
+		p2.addScoreChangeListener(resetter);
 
 		setRunning(true);
 		startGameLoop();
@@ -96,44 +107,7 @@ public class PongGame implements Game {
 	 * begin the main game loop
 	 */
 	private void startGameLoop() {
-		int stepTime = 1000 / 60;
-		Thread t = new Thread("Game Loop") {
-			@Override
-			public void run() {
-				while (true) {
-					if (isRunning()) {
-						//collision detection
-						for (GameFieldEntity obj : field.getEntities()) {
-							for (GameFieldEntity other : field.getEntities()) {
-								if (obj == other) {
-									continue;
-								}
-								
-								obj.detectCollision(other);
-							}
-						}
-						
-						//update locations
-						for (GameTimedEntity obj : updateList) {
-							obj.update();
-						}
-						
-						//check for win
-						if (players.get(0).getScore() == 10
-						        || players.get(1).getScore() == 10) {
-							setRunning(false);
-						}
-						
-						//wait
-						try {
-							Thread.sleep(stepTime);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		};
+		Thread t = new PongGameLoop(this, "Game Loop");
 		t.start();
 	}
 
@@ -151,6 +125,7 @@ public class PongGame implements Game {
 	 * 
 	 * @param object the game object to add
 	 */
+	@Override
 	public void addTimedObject(GameTimedEntity object) {
 		updateList.add(object);
 	}
@@ -169,6 +144,7 @@ public class PongGame implements Game {
 	 * 
 	 * @param value true if the game is running
 	 */
+	@Override
 	public void setRunning(boolean value) {
 		running = value;
 	}
@@ -176,6 +152,7 @@ public class PongGame implements Game {
 	/**
 	 * @return the value of running - true if the game is currently runnig
 	 */
+	@Override
 	public boolean isRunning() {
 		return running;
 	}
@@ -243,25 +220,17 @@ public class PongGame implements Game {
 	}
 
 	/**
-	 * Create the net
-	 *
-	 * @return the net
+	 * Create the walls and goals. Assumes exactly two players in
+	 * {@link #players}.
 	 */
-	private Wall createWallsAndGoals(Side side) {
-		int y = 0;
-		if (side == Side.NORTH) {
-			y = 0;
-		} else if (side == Side.SOUTH) {
-			y = field.getHeight();
-		} else if (side == Side.EAST) {
-			// GOAL
-		} else if (side == Side.WEST) {
-			// GOOOOOOOOOAL
-		}
-
-		int x = 0;
-		int width = field.getWidth();
-		return new Wall(Vector.cartesian(x, y), width);
+	private void createWallsAndGoals() {
+		field.addEntity(new Wall(Vector.cartesian(0, 0), field.getWidth(),
+		        Wall.THICKNESS));
+		field.addEntity(new Wall(Vector.cartesian(0, field.getHeight()), field
+		        .getWidth(), Wall.THICKNESS));
+		field.addEntity(new Goal(Vector.cartesian(0, 0), Wall.THICKNESS, field
+		        .getHeight(), players.get(1)));
+		field.addEntity(new Goal(Vector.cartesian(field.getWidth() - 1, 0),
+		        Wall.THICKNESS, field.getHeight(), players.get(0)));
 	}
 }
-
