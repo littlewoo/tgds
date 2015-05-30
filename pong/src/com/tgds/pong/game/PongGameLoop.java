@@ -36,7 +36,7 @@ public final class PongGameLoop extends GameLoop {
 					continue;
 				}
 
-				obj.detectCollision(other);
+				obj.checkCollision(other);
 			}
 		}
 

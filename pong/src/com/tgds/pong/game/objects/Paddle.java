@@ -41,24 +41,25 @@ public class Paddle extends MobileGameFieldEntity {
 	}
 
 	/**
+	 * Store the previous location each update cycle
+	 */
+	@Override
+	public void update() {
+		super.update();
+		previousLoc = getLoc();
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean detectCollision(GameFieldEntity other) {
-		if (this.checkCollision(other))
-		{
-			if (other instanceof Wall) {
-				setLoc(previousLoc);
-				double x = 0;
-				double y = -getVelocity().getY() - 1; // -1 so it is on screen
-				setVelocity(Vector.cartesian(x, y));
-			}
-		} else {
-			if (other instanceof Wall) {
-				previousLoc = getLoc();
-			}
+	public void respondToCollision(GameFieldEntity other) {
+		if (other instanceof Wall) {
+			setLoc(previousLoc);
+			double x = 0;
+			double y = -getVelocity().getY() - 1; // -1 so it is on screen
+			setVelocity(Vector.cartesian(x, y));
 		}
-		return false;
 	}
 
 	/**

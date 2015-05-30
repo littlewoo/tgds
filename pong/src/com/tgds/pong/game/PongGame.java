@@ -7,6 +7,7 @@
  */
 package com.tgds.pong.game;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +16,15 @@ import com.tgds.api2d.game.GameField;
 import com.tgds.api2d.game.entities.GameTimedEntity;
 import com.tgds.api2d.game.scoring.ScoreChangeListener;
 import com.tgds.api2d.game.scoring.ScoreKeeper;
+import com.tgds.api2d.ui.output.sound.CollisionSoundPlayer;
 import com.tgds.api2d.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.controllers.BallController;
 import com.tgds.pong.game.controllers.PaddleController;
+import com.tgds.pong.game.objects.Ball;
 import com.tgds.pong.game.objects.Goal;
 import com.tgds.pong.game.objects.Net;
+import com.tgds.pong.game.objects.Paddle;
 import com.tgds.pong.game.objects.Wall;
 
 /**
@@ -98,6 +102,9 @@ public class PongGame implements Game {
 		};
 		p1.addScoreChangeListener(resetter);
 		p2.addScoreChangeListener(resetter);
+
+		initSound(p1control.getPaddle(), p2control.getPaddle(), ballController
+		        .getBall());
 
 		setRunning(true);
 		startGameLoop();
@@ -217,6 +224,26 @@ public class PongGame implements Game {
 		int y = getVerticalCentre();
 		int height = field.getHeight();
 		return new Net(Vector.cartesian(x, y), height);
+	}
+
+	/**
+	 * Set up the sound effects for certain game events
+	 * 
+	 * @param paddle1 the first paddle
+	 * @param paddle2 the second paddle
+	 * @param ball the ball
+	 */
+	private void initSound(Paddle paddle1, Paddle paddle2, Ball ball) {
+		CollisionSoundPlayer soundPlayer = CollisionSoundPlayer.instance();
+
+		soundPlayer.addSoundEffect(paddle1, ball.getClass(), new File(
+		        "resources/com/tgds/pong/sounds/pop1.wav"));
+		soundPlayer.addSoundEffect(paddle2, ball.getClass(), new File(
+		        "resources/com/tgds/pong/sounds/pop2.wav"));
+		soundPlayer.addSoundEffect(ball, Goal.class, new File(
+		        "resources/com/tgds/pong/sounds/ting.wav"));
+		soundPlayer.addSoundEffect(ball, Wall.class, new File(
+		        "resources/com/tgds/pong/sounds/bounce.wav"));
 	}
 
 	/**

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>Templecombe Game Development Society</title>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+	</head>
+	<body>
+		<div class="page">
+			<!--#include file="navbar.html" -->
+			<div id="page-text">
+				<p><strong><h2>Welcome to the Templecombe Game Development Society!</h2></strong></p>
+				<p>
+					The Templecombe Game Development Society is a group of friends making games together. 
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
+							
+							
+					
+					
