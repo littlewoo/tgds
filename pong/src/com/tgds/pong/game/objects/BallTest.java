@@ -18,6 +18,7 @@ import com.tgds.api2d.util.Vector;
 public class BallTest {
 	
 	Ball ball;
+	Paddle paddle;
 
 	@Before
 	public void setUp() throws Exception {
@@ -38,8 +39,6 @@ public class BallTest {
 	
 	@Test
 	public void testNoReactToCollision() {
-		Vector ballLoc = ball.getLoc();
-		
 		Wall mockWall = mock(Wall.class);
 		Shape mockWallShape = new Rectangle(200, 1);
 				
@@ -72,6 +71,11 @@ public class BallTest {
 	
 	@Test
 	public void testReactToCollisionPaddleTop() {
+		Vector ballLoc = ball.getLoc();
+		paddle = new Paddle(ballLoc); //TODO change this location to be appropriate
+		
+		Vector paddleLoc = paddle.getLoc();
+		
 		fail("Not yet implemented"); // TODO write test
 	}
 	
