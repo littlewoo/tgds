@@ -255,9 +255,17 @@ public class PongGame implements Game {
 		        Wall.THICKNESS));
 		field.addEntity(new Wall(Vector.cartesian(0, field.getHeight()), field
 		        .getWidth(), Wall.THICKNESS));
-		field.addEntity(new Goal(Vector.cartesian(0, 0), Wall.THICKNESS, field
-		        .getHeight(), players.get(1)));
-		field.addEntity(new Goal(Vector.cartesian(field.getWidth() - 1, 0),
-		        Wall.THICKNESS, field.getHeight(), players.get(0)));
+		
+		Goal goal1 = new Goal(Vector.cartesian(0, 0), Wall.THICKNESS, field
+		        .getHeight(), players.get(1));
+		
+		field.addEntity(goal1);
+		updateList.add(goal1);
+		
+		Goal goal2 = new Goal(Vector.cartesian(field.getWidth() - 1, 0),
+		        Wall.THICKNESS, field.getHeight(), players.get(0));
+		
+		field.addEntity(goal2);
+		updateList.add(goal2);
 	}
 }
